@@ -69,15 +69,13 @@ function List() {
   };
 
   return (
-    <div
-      className='list-container'
-      onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}
-    >
+    <div className='list-container'>
       <h2 className='list-header'>My tasks</h2>
       <div>
         <input
           value={newItem}
-          onChange={(e) => setNewItem(e.target.value)}
+          onInput={(e) => setNewItem(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && handleCreate()}
           placeholder='Add new item'
         />
         <button onClick={handleCreate}>Add</button>
