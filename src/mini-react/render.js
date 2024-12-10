@@ -28,11 +28,16 @@ const workLoop = (deadline) => {
 };
 
 const commitRoot = () => {
-  deletions.forEach(commitWork);
-  commitWork(wipRoot.child);
-  visualizer(wipRoot);
-  setCurrentRoot(wipRoot);
-  setWipRoot(null);
+  try {
+    deletions.forEach(commitWork);
+    commitWork(wipRoot.child);
+    visualizer(wipRoot);
+    setCurrentRoot(wipRoot);
+  } catch (error) {
+    console.error('Error in commit:', error);
+  } finally {
+    setWipRoot(null);
+  }
 };
 
 const commitWork = (fiber) => {
